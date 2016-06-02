@@ -1,0 +1,139 @@
+<html ng-app="auth_using_mean">
+<head>
+  <title>Authentication system</title>
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+
+  <script src="/javascripts/angularApp.js"></script>
+  <style> .glyphicon-thumbs-up { cursor:pointer } </style>
+</head>
+<body ng-app="auth_using_mean">
+  <nav class="navbar navbar-default pull-right" ng-controller="NavCtrl">
+      <ul class="nav navbar-nav">
+        <li ng-show="isLoggedIn()"><a>{{ currentUser() }}</a></li>
+        <li ng-show="isLoggedIn()"><a href="" ng-click="logOut()">Log Out</a></li>
+        <li ng-hide="isLoggedIn()"><a href="/#/login">Log In</a></li>
+        <li ng-hide="isLoggedIn()"><a href="/#/register">Register</a></li>
+      </ul>
+    </nav>
+
+  <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <ui-view></ui-view>
+      </div>
+   </div>
+
+  <script type="text/ng-template" id="/home.html">
+    <div ng-init="getDetail()">
+    <div class="page-header">
+      <h1>Authentication System</h1>
+
+      {{test}}<br>
+      <div ng-show="isLoggedIn()">
+      {{ detail.fname }}<br>
+      {{detail.mobile}}<br>
+      {{ detail.email }}<br>
+       {{ detail.address }}
+      </div>
+
+    </div>
+    </div>
+    
+  </script>
+
+
+
+  <script type="text/ng-template" id="/register.html">
+    <div class="page-header">
+      <h1>Authentication system</h1>
+    </div>
+
+    <div ng-show="error" class="alert alert-danger row">
+      <span>{{ error.message }}</span>
+    </div>
+
+    <form ng-submit="register()"
+      style="margin-top:30px;">
+      <h3>Register</h3>
+
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Full Name"
+        ng-model="user.fname"></input>
+      </div>
+
+      <div class="form-group">
+        <input type="email"
+        class="form-control"
+        placeholder="Email"
+        ng-model="user.email"></input>
+      </div>
+
+       <div class="form-group">
+        <input type="number"
+        class="form-control"
+        placeholder="Mobile"
+        ng-model="user.mobile"></input>
+      </div>
+
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Address"
+        ng-model="user.address"></input>
+      </div>
+
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Usename"
+        ng-model="user.username"></input>
+      </div>
+
+      <div class="form-group">
+        <input type="password"
+        class="form-control"
+        placeholder="Password"
+        ng-model="user.password"></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+  </script>
+
+  <script type="text/ng-template" id="/login.html">
+    <div class="page-header">
+      <h1>Authentication system</h1>
+    </div>
+
+    <div ng-show="error" class="alert alert-danger row">
+      <span>{{ error.message }}</span>
+    </div>
+
+    <form ng-submit="logIn()"
+      style="margin-top:30px;">
+      <h3>Log In</h3>
+
+      <div class="form-group">
+        <input type="text"
+        class="form-control"
+        placeholder="Username"
+        ng-model="user.username"></input>
+      </div>
+
+      <div class="form-group">
+        <input type="password"
+        class="form-control"
+        placeholder="Password"
+        ng-model="user.password"></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Log In</button>
+    </form>
+    </script>
+
+
+
+</body>
+</html>
